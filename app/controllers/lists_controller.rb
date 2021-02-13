@@ -1,17 +1,22 @@
 class ListsController < ApplicationController
     def index 
-        render json: List.all
+        render json: ListSerializer.new(List.all)
     end 
+    
+    # def show 
+    #     list = List.find(params[:id])
+    #     render json: ListSerializer.new(list)
+    # end 
 
     def create 
         list = List.create(list_params)
-        render json: list
+        render json: ListSerializer.new(list)
     end
 
     def update 
         list = List.find_by(id: params[:id])
         list.update(list_params)
-        render json: list
+        render json: ListSerializer.new(list)
     end 
 
     def destroy 
